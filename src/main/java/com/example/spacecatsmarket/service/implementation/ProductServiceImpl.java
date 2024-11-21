@@ -1,6 +1,7 @@
 package com.example.spacecatsmarket.service.implementation;
 
-import com.example.spacecatsmarket.DTO.ProductDTO;
+import com.example.spacecatsmarket.DTO.product.ProductDTO;
+import com.example.spacecatsmarket.DTO.product.ProductEntryDTO;
 import com.example.spacecatsmarket.domain.Product;
 import com.example.spacecatsmarket.mappers.ProductMapper;
 import com.example.spacecatsmarket.service.ProductService;
@@ -25,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDTO createProduct(ProductDTO productDTO) {
+    public ProductEntryDTO createProduct(ProductDTO productDTO) {
         Product product = productMapper.toEntity(productDTO).toBuilder().id(productIdSequence++).build();
         prototypeDatabase.put(product.getId(), product); 
         return productMapper.toDTO(product);
@@ -38,7 +39,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDTO getProductById(Long id) {
+    public ProductEntryDTO getProductById(Long id) {
         Product product = prototypeDatabase.get(id);
         if (product == null) {
             throw new RuntimeException("Product not found");
@@ -47,7 +48,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDTO updateProduct(Long id, ProductDTO productDTO) {
+    public ProductEntryDTO updateProduct(Long id, ProductDTO productDTO) {
         Product product = prototypeDatabase.get(id).toBuilder().name(productDTO.getName()).price(productDTO.getPrice())
                 .description(productDTO.getDescription()).categoryId(productDTO.getCategoryId()).build();
         System.out.println("Product retrieved: " + product);

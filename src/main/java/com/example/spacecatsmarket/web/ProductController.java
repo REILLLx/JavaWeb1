@@ -1,6 +1,7 @@
 package com.example.spacecatsmarket.web;
 
-import com.example.spacecatsmarket.DTO.ProductDTO;
+import com.example.spacecatsmarket.DTO.product.ProductDTO;
+import com.example.spacecatsmarket.DTO.product.ProductEntryDTO;
 import com.example.spacecatsmarket.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class ProductController {
     }
 
     @PostMapping()
-    public ResponseEntity<ProductDTO> createProduct(@Valid @RequestBody ProductDTO productDTO) {
-        ProductDTO createdProduct = productService.createProduct(productDTO);
+    public ResponseEntity<ProductEntryDTO> createProduct(@Valid @RequestBody ProductDTO productDTO) {
+        ProductEntryDTO createdProduct = productService.createProduct(productDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
     }
 
@@ -34,14 +35,14 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDTO> getProductById(@PathVariable("id") Long id) {
-        ProductDTO product = productService.getProductById(id);
+    public ResponseEntity<ProductEntryDTO> getProductById(@PathVariable("id") Long id) {
+        ProductEntryDTO product = productService.getProductById(id);
         return ResponseEntity.ok(product);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductDTO> updateProduct(@PathVariable("id") Long id, @Valid @RequestBody ProductDTO productDTO) {
-        ProductDTO updatedProduct = productService.updateProduct(id, productDTO);
+    public ResponseEntity<ProductEntryDTO> updateProduct(@PathVariable("id") Long id, @Valid @RequestBody ProductDTO productDTO) {
+        ProductEntryDTO updatedProduct = productService.updateProduct(id, productDTO);
         return ResponseEntity.ok(updatedProduct);
     }
 

@@ -1,6 +1,7 @@
 package com.example.spacecatsmarket.web;
 
-import com.example.spacecatsmarket.DTO.ProductDTO;
+import com.example.spacecatsmarket.DTO.product.ProductDTO;
+import com.example.spacecatsmarket.DTO.product.ProductEntryDTO;
 import com.example.spacecatsmarket.service.implementation.ProductServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -38,7 +39,7 @@ class ProductControllerIT {
 
         ProductDTO productDTO = ProductDTO.builder().name("Test Product Star").price(100.0).build();
 
-        ProductDTO createdProduct = ProductDTO.builder().name("Test Product Comet").price(1523.0).build();
+        ProductEntryDTO createdProduct = ProductEntryDTO.builder().name("Test Product Comet").price(1523.0).build();
 
         when(productServiceImpl.createProduct(any(ProductDTO.class))).thenReturn(createdProduct);
 
@@ -68,7 +69,7 @@ class ProductControllerIT {
     @Test
     void testGetProductById() throws Exception {
         Long productId = 1L;
-        ProductDTO product = ProductDTO.builder().build(); // Заповни даними продукту
+        ProductEntryDTO product = ProductEntryDTO.builder().build(); // Заповни даними продукту
 
         when(productServiceImpl.getProductById(anyLong())).thenReturn(product);
 
@@ -85,7 +86,7 @@ class ProductControllerIT {
         Long productId = 1L;
         ProductDTO productDTO = ProductDTO.builder().name("Test Product Star").price(100.0).build();
 
-        ProductDTO updatedProduct = ProductDTO.builder().name("Test Product Comet").price(1902.0).build();
+        ProductEntryDTO updatedProduct = ProductEntryDTO.builder().name("Test Product Comet").price(1902.0).build();
 
         when(productServiceImpl.updateProduct(anyLong(), any(ProductDTO.class))).thenReturn(updatedProduct);
 
