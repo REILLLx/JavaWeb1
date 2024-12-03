@@ -5,6 +5,8 @@ import com.example.spacecatsmarket.DTO.product.ProductEntryDTO;
 import com.example.spacecatsmarket.domain.Product;
 import org.mapstruct.Mapper;
 
+
+
 import java.util.List;
 
 @Mapper(componentModel = "spring")

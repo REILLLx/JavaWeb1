@@ -39,7 +39,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ProblemDetail handleValidationExceptions(MethodArgumentNotValidException ex, WebRequest request) {
-        // Збираємо помилки валідації у зручний формат
         Map<String, String> errors = new HashMap<>();
         for (FieldError error : ex.getBindingResult().getFieldErrors()) {
             errors.put(error.getField(), error.getDefaultMessage());
@@ -47,7 +46,6 @@ public class GlobalExceptionHandler {
 
         logger.error("Validation error: {}", errors);
 
-        // Створюємо ProblemDetail для відповіді
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "Validation error");
         problemDetail.setTitle("Bad Request");
         problemDetail.setType(URI.create("https://example.com/errors/validation-error"));
@@ -56,5 +54,13 @@ public class GlobalExceptionHandler {
 
         return problemDetail;
     }
+    @ExceptionHandler(CatNotFoundException.class)
+    public ResponseEntity<String> handleCatNotFoundException(CatNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
 
+    @ExceptionHandler(FeatureNotAvailableException.class)
+    public ResponseEntity<Void> handleFeatureToggleException(FeatureNotAvailableException ex) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    }
 }
