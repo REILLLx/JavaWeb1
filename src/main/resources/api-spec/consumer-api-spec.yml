@@ -127,6 +127,32 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
+  /api/v1/cosmo-cats/{name}:
+    get:
+      summary: Get a cosmo-cat by name
+      tags:
+        - CosmoCats
+      parameters:
+        - in: path
+          name: name
+          required: true
+          schema:
+            type: string
+          description: Name of the cosmo-cat to retrieve
+      responses:
+        '200':
+          description: Cosmo-cat retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: Cosmo-cat not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
 components:
   schemas:
     ProductDetailsDto:

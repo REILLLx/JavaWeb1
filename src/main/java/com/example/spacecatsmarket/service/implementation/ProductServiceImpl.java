@@ -17,8 +17,8 @@ import java.util.Map;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductMapper productMapper;
-    private final Map<Long, Product> prototypeDatabase = new HashMap<>(); 
-    private Long productIdSequence = 1L; 
+    private final Map<Long, Product> prototypeDatabase = new HashMap<>();
+    private Long productIdSequence = 1L;
 
     @Autowired
     public ProductServiceImpl(ProductMapper productMapper) {
@@ -28,7 +28,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductEntryDTO createProduct(ProductDTO productDTO) {
         Product product = productMapper.toEntity(productDTO).toBuilder().id(productIdSequence++).build();
-        prototypeDatabase.put(product.getId(), product); 
+        prototypeDatabase.put(product.getId(), product);
         return productMapper.toDTO(product);
     }
 
@@ -67,6 +67,4 @@ public class ProductServiceImpl implements ProductService {
         }
         prototypeDatabase.remove(id);
     }
-
-
 }
