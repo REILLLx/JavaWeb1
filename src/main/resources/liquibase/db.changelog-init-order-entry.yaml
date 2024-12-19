@@ -1,0 +1,46 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-order-entry-table
+      author: REILLLx
+      preconditions:
+        - onFail: MARK_RAN
+        - not:
+            tableExists:
+              tableName: Order_Entry
+      changes:
+        - createTable:
+            tableName: Order_Entry
+            columns:
+              - column:
+                  name: order_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: product_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: amount
+                  type: INT
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            tableName: Order_Entry
+            columnNames: order_id, product_id
+            constraintName: pk_order_entry
+        - addForeignKeyConstraint:
+            baseTableName: Order_Entry
+            baseColumnNames: order_id
+            referencedTableName: Orders
+            referencedColumnNames: id
+            constraintName: fk_order_entry_orders
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: Order_Entry
+            baseColumnNames: product_id
+            referencedTableName: Product
+            referencedColumnNames: id
+            constraintName: fk_order_entry_product
+            onDelete: CASCADE

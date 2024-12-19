@@ -7,9 +7,9 @@ import io.swagger.v3.oas.annotations.Parameter;
 import java.util.List;
 
 public interface ProductService {
-    ProductEntryDTO createProduct(ProductDTO productDTO);
-    List<ProductDTO> getAllProducts();
+    ProductEntryDTO createProduct(ProductEntryDTO productEntryDTO);
+    List<ProductEntryDTO> getAllProducts();
     ProductEntryDTO getProductById(Long id);
-    ProductEntryDTO updateProduct(@Parameter Long id, @Parameter ProductDTO productDTO);
+    ProductEntryDTO updateProduct(@Parameter Long id, @Parameter ProductEntryDTO productEntryDTO);
     void deleteProduct(Long id);
 }

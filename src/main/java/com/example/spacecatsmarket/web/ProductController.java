@@ -1,6 +1,5 @@
 package com.example.spacecatsmarket.web;
 
-import com.example.spacecatsmarket.DTO.product.ProductDTO;
 import com.example.spacecatsmarket.DTO.product.ProductEntryDTO;
 import com.example.spacecatsmarket.service.ProductService;
 import jakarta.validation.Valid;
@@ -23,14 +22,14 @@ public class ProductController {
     }
 
     @PostMapping()
-    public ResponseEntity<ProductEntryDTO> createProduct(@Valid @RequestBody ProductDTO productDTO) {
+    public ResponseEntity<ProductEntryDTO> createProduct(@Valid @RequestBody ProductEntryDTO productDTO) {
         ProductEntryDTO createdProduct = productService.createProduct(productDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
     }
 
     @GetMapping()
-    public ResponseEntity<List<ProductDTO>> getAllProducts() {
-        List<ProductDTO> products = productService.getAllProducts();
+    public ResponseEntity<List<ProductEntryDTO>> getAllProducts() {
+        List<ProductEntryDTO> products = productService.getAllProducts();
         return ResponseEntity.ok(products);
     }
 
@@ -41,7 +40,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductEntryDTO> updateProduct(@PathVariable("id") Long id, @Valid @RequestBody ProductDTO productDTO) {
+    public ResponseEntity<ProductEntryDTO> updateProduct(@PathVariable("id") Long id, @Valid @RequestBody ProductEntryDTO productDTO) {
         ProductEntryDTO updatedProduct = productService.updateProduct(id, productDTO);
         return ResponseEntity.ok(updatedProduct);
     }

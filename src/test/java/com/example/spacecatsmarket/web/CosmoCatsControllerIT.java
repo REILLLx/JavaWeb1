@@ -31,13 +31,11 @@ class CosmoCatsControllerIT {
 
     @Test
     void testGetCosmoCat_ReturnsMessage() throws Exception {
-        // Arrange
         String catName = "Luna";
         String catMessage = "Hello, Luna!";
 
         when(cosmoCatService.getCosmoCats(catName)).thenReturn(catMessage);
 
-        // Act & Assert
         mockMvc.perform(get("/api/v1/cosmo-cats/{name}", catName)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -48,13 +46,11 @@ class CosmoCatsControllerIT {
 
     @Test
     void testGetCosmoCat_NotFound() throws Exception {
-        // Arrange
         String catName = "UnknownCat";
 
         when(cosmoCatService.getCosmoCats(catName))
                 .thenThrow(new CatNotFoundException(catName));
 
-        // Act & Assert
         mockMvc.perform(get("/api/v1/cosmo-cats/{name}", catName)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());

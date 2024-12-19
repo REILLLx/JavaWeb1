@@ -25,7 +25,7 @@ jacocoTestCoverageVerification {
                     'com/example/spacecatsmarket/domain/*',
                     'com/example/spacecatsmarket/mappers/*',
                     'com/example/spacecatsmarket/featuretoggle/*',
-                    'com/example/spacecatsmarket/service/featuretoggle/*'
+                    'com/example/spacecatsmarket/service/*'
             ]
             limit {
                 counter = 'LINE'
