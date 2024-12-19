@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-increment-sequence
+      author: REILLLx
+      changes:
+        - createSequence:
+            sequenceName: increment_sequence
+            startValue: 1
+            incrementBy: 50
